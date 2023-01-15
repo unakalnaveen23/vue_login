@@ -1,0 +1,23 @@
+{
+  "employee": [
+    {
+      "Emp_Name": "Naveen",
+      "Emp_LastName": "unakal",
+      "Emp_phoneno": "7019281976",
+      "Emp_Desigination": "SDE",
+      "id": 1
+    },
+    {
+      "Emp_Name": "ss",
+      "Emp_LastName": "ss",
+      "Emp_phoneno": "ss",
+      "Emp_Desigination": "sss",
+      "id": 2
+    }
+  ],
+  "register": [
+    {
+      "name": "na"
+    }
+  ]
+}

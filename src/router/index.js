@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Login from '../views/login.vue'
+import register from '../views/register.vue'
+import forgotpwd from '../views/forgotpwd.vue'
+import admin from '../views/admin.vue'
+import employee from '../views/employee.vue'
+import employeecreate from '../views/employeecreate.vue'
+import employeeedit from '../views/employeeedit.vue'
 
 const routes = [
   {
@@ -7,6 +14,43 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: register
+  },
+  {
+    path: '/forgotpwd',
+    name: 'forgotpwd',
+    component: forgotpwd
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: admin,
+  },
+      {
+        path: '/employee',
+        name: 'employee',
+        component: employee
+      },
+      {
+        path: '/employeecreate',
+        name: 'employeecreate',
+        component: employeecreate
+      },
+      {
+        path: '/employee/:id/edit',
+        component: employeeedit,
+        name: 'employeeedit',
+        props: true
+      },
+
   {
     path: '/about',
     name: 'about',
