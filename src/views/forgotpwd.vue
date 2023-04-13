@@ -6,20 +6,21 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
-        <form>
+        <form @submit.prevent="submit">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input
               type="email"
               class="form-control"
               id="exampleInputEmail1"
+              v-model="email"
               aria-describedby="emailHelp"
               placeholder="Enter email"
               required
             />
           </div>
 
-          <button type="submit" class="btn btn-primary">Send Mail</button>
+          <button v-on:click="forgot" class="btn btn-primary">Send Mail</button>
         </form>
         <br>
         Click Here to <a href="/login">Login!</a>
@@ -31,7 +32,24 @@
 
 <script>
 export default {
-    name: "forgotpwd"
+    name: "forgotpwd",
+    data(){
+      return{
+          email:"",
+          err:[]
+      }
+    },
+    methods:{
+      forgot(){
+          this.err = []
+          if(this.email === ""){
+            alert("Please Enter email Adress")
+          }
+          if(this.email != ""){
+            alert("Rest Link Has Been Sent to Register Mail Id!")
+          }
+      }
+    }
 }
 </script>
 

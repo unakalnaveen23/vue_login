@@ -1,53 +1,35 @@
 <template>
   <div class="container">
-    <h1 style = "text-decoration:underline;">Login To Employee's Protal</h1>
+    <h1 style="text-decoration:underline;">Login</h1>
     <br>
     <br>
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
-          <p v-if="err.length>0" class="text-danger">
-            <b>Please fill the below details!</b>
-            <ul>
-              <li v-for="i in err" v-bind:key="i">{{ i }}
-              </li>
-            </ul>
-          </p>
-      <form @submit.prevent="submit">
+        <form @submit.prevent="LoginData">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="Email"
-              v-model="form.Email"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              required
-            />
+            <label for="exampleInputEmail1">User ID</label>
+            <input type="text" class="form-control" id="Email" v-model="user.userId" aria-describedby="emailHelp"
+              placeholder="Enter UserId" required />
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="Password"
-              v-model="form.Password"
-              placeholder="Password"
-             required
-            />
-            <div v-if="form.Password.length >0 && form.Password.length <6" class="text-danger">Your Password must have 6 letters!  </div>
+            <input type="password" class="form-control" id="Password" v-model="user.password" placeholder="Password"
+              required />
+              
+            <div v-if="user.password.length > 0 && user.password.length < 6" class="text-danger">
+              Your Password length must be 8 min & must have comination letters Alphabet number!</div>
           </div>
-        
-          <button v-on:click="login" class="btn btn-primary">Login</button>
-        
-        <br>
-        <br>
-        <a href="/forgotpwd">Forgot Password?</a>
-        <br>
-        Don't Have an Account?<a href="/register">Click Here</a>
-      </form>
-    
+
+          <button class="btn btn-primary">Login</button>
+
+          <br>
+          <br>
+          <a href="/forgotpwd">Forgot Password?</a>
+          <br>
+          Don't Have an Account?<a href="/register">Click Here</a>
+        </form>
+
       </div>
       <div class="col-md-3"></div>
     </div>
@@ -61,29 +43,42 @@ export default {
   name: "Login",
   data() {
     return {
-      form: {
-        Email: "",
-        Password: "",
+      user: {
+        userId: '',
+        password: ''
       },
-      err: [],
+
     };
   },
-  methods: {
-    login() {
-      this.err = [];
-      for (const i in this.form) {
-        if (this.form[i] === "" || this.form[i].length === 0) {
-          this.err.push(i);
-        }
-      }
-      if (this.err.length === 0) {
-        alert("login successfull!");
-        router.push("/admin")
-      }
-      console.warn(this.err);
-    },
+  created() {
+
   },
-};
+  methods: {
+    LoginData() {
+      axios.post("http://localhost:8081/user/Authenticate", this.user)
+        .then(
+          ({ data }) => {
+            console.log(data);
+            if (data.role == "Admin" || data.role == "User") {
+              this.$toast.success("Login successfull!", {
+                position: "top-right",
+                duration: 5000,
+                dismissible: false,
+              });
+              router.push("/Events")
+            }
+            else{
+              this.$toast.error("Invalid User or Password!", {
+                position: "top-right",
+                duration: 5000,
+                dismissible: false,
+              });
+            }
+          },
+        )
+    },
+  }
+}
 </script>
 
 <style scoped>

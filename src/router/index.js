@@ -3,16 +3,20 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/login.vue'
 import register from '../views/register.vue'
 import forgotpwd from '../views/forgotpwd.vue'
-import admin from '../views/admin.vue'
-import employee from '../views/employee.vue'
-import employeecreate from '../views/employeecreate.vue'
-import employeeedit from '../views/employeeedit.vue'
+import Events from '../views/Events.vue'
+import Participants from '../views/Participants.vue'
+import dashboard from '../views/dashboard.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/Dashboard',
+    name: 'dashboard',
+    component: dashboard
   },
   {
     path: '/login',
@@ -30,27 +34,16 @@ const routes = [
     component: forgotpwd
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: admin,
+    path: '/Events/:state',
+    name: 'Events',
+    component: Events,
+    props:true
   },
-      {
-        path: '/employee',
-        name: 'employee',
-        component: employee
-      },
-      {
-        path: '/employeecreate',
-        name: 'employeecreate',
-        component: employeecreate
-      },
-      {
-        path: '/employee/:id/edit',
-        component: employeeedit,
-        name: 'employeeedit',
-        props: true
-      },
-
+  {
+    path: '/Participants',
+    name: 'Participants',
+    component: Participants
+  },
   {
     path: '/about',
     name: 'about',
@@ -62,7 +55,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  //history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes
 })
 

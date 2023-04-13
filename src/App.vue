@@ -1,23 +1,14 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="/">Employee's Management Protal</a>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        
-      </li>
-      <li class="nav-item active">
-       
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <router-link class="nav-link justify-content-end" to="/" style>Home</router-link>
-      <router-link class="nav-link justify-content-end" to="/about">About</router-link>
-      <!-- <router-link class="nav-link" to="/login"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button></router-link>
-      <router-link class="nav-link" to="/register"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Register</button></router-link> -->
-    </form>
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="pull-left">
+    <h2>Event Management System</h2>
+  </div>
+      <div class="pull-right">
+    <!-- <a class="btn btn-lg pull-right "><h3><span class="glyphicon glyphicon-user"></span></h3></a> -->
+    <!-- <a href="/about" class="btn btn-lg pull-right "><h3>About</h3></a> -->
+    <a href="/" class="btn btn-lg pull-right"><h3><span class="glyphicon glyphicon-user"></span>LogOut</h3></a>
+    <!-- <a class="btn btn-lg pull-right "><h3><span class="glyphicon glyphicon-user"></span></h3></a> -->
   </div>
 </nav>
   </div>
@@ -39,16 +30,11 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #000000;
+  color: white;
 }
 
 nav a.router-link-exact-active {
-  color: #000000;
+  color: white;
 }
-
-.navbar{
-  background-color: rgb(229, 235, 241);
-}
-
 
 </style>
