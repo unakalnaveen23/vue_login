@@ -1,6 +1,11 @@
 <template>
   <div id="app">
+    <div>
     <h1><u>Event Details</u></h1>
+    </div>
+    <!-- <div>
+      <a href="/" class="btn btn-lg "><h3 style="color: black;"><span class="glyphicon glyphicon-user"></span>LogOut</h3></a>
+    </div> -->
   </div>
   <div class="search pull-right">
     <input type="text" v-model="search" placeholder="Search By Event Name,Date,Location...">
@@ -361,14 +366,17 @@ export default {
 
   },
   async created() {
+    
     this.getparticipants();
     await this.getEvent();
     this.disableedit();
   },
   mounted() {
+    console.log(this.$route.path);
     console.log(this.state);
     if (this.state == 'Admin') {
       this.isadmin = true
+      
     }
     else {
       this.isadmin = false
@@ -487,6 +495,15 @@ export default {
 
     // add participants
     async addbooking() {
+      var checkadd = this.participants.filter((participant) => {
+        console.log(participant);
+        console.log(this.participantName);
+        if (participant.participantName == this.participantName || participant.participantEmail == this.participantEmail) {
+          return participant.eventName.match(this.eventName) && participant.participantEmail.match(this.participantEmail)
+        }
+      })
+
+      if (checkadd.length == 0) {
       try {
         console.log(this.evename);
         for (let i = 0; i < this.events.length; i++) {
@@ -522,6 +539,14 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    }
+    else{
+      this.$toast.error("Participant Already Exists", {
+          position: "top-right",
+          duration: 8000,
+          dismissible: false,
+        });
+    }
     },
 
     // add event
@@ -650,8 +675,8 @@ export default {
         axios.get("http://localhost:8081/events").then(response => {
           //console.log(response.data);
           const obj = response.data;
-          const header = ["Event Id", "Event Name", "Event Date", "Organizer Email", "Organizer Phone", "Event Description", "Event Type", "Event Location", "Event Status", "Maximum Seats"];
-          const field = ["id", "eventName", "eventDate", "organizerEmail", "organizerPhone", "description", "eventType", "location", "status", "maxSeat"];
+          const header = ["Event Id", "Event Name", "Event Date", "Organizer Email", "Organizer Phone", "Event Description", "Event Type", "Event Location", "Event Status", "Maximum Seats","Remaining Seats"];
+          const field = ["id", "eventName", "eventDate", "organizerEmail", "organizerPhone", "description", "eventType", "location", "status", "maxSeat","remSeat"];
           const Data = this.formatejson(field, obj);
           excel.export_json_to_excel({
             header: header,

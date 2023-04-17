@@ -7,13 +7,35 @@
       <div class="pull-right">
     <!-- <a class="btn btn-lg pull-right "><h3><span class="glyphicon glyphicon-user"></span></h3></a> -->
     <!-- <a href="/about" class="btn btn-lg pull-right "><h3>About</h3></a> -->
-    <a href="/" class="btn btn-lg pull-right"><h3><span class="glyphicon glyphicon-user"></span>LogOut</h3></a>
+    <a href="/" v-if="url" class="btn btn-lg pull-right"><h3><span class="glyphicon glyphicon-user"></span>LogOut</h3></a>
     <!-- <a class="btn btn-lg pull-right "><h3><span class="glyphicon glyphicon-user"></span></h3></a> -->
   </div>
 </nav>
   </div>
   <router-view/>
 </template>
+
+<script>
+   export default {
+    data(){
+      return{
+        url:false
+      }
+    },
+        created(){
+            console.log(this.$route.path)
+            if (this.$route.path == "/") {
+              this.url=false
+              console.log("url is /");
+            } 
+            if(window.location.pathname == "/Events/Admin" || window.location.pathname == "/Events/User" || window.location.pathname == "/Participants") {
+              this.url=true
+              console.log("url is not /");
+            }
+
+        }
+    }
+</script>
 
 <style>
 #app {
